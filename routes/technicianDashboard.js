@@ -2167,7 +2167,7 @@ router.get('/api/mapping-data', technicianAuth, async (req, res) => {
         // Get backbone data from database (menggunakan odp_connections table untuk routing antar ODP)
         const backbone = await new Promise((resolve, reject) => {
             db.all(`
-                SELECT oc.id, CONCAT('ODP-', oc.from_odp_id, '-', oc.to_odp_id) as name, 
+                SELECT oc.id, 'ODP-' || oc.from_odp_id || '-' || oc.to_odp_id as name, 
                        oc.from_odp_id, oc.to_odp_id, oc.connection_type, oc.cable_length,
                        oc.status, oc.cable_capacity, oc.notes,
                        o1.name as start_odp_name, o1.latitude as start_lat, o1.longitude as start_lng,
