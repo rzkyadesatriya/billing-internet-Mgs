@@ -11,11 +11,11 @@
   [![GitHub Stars](https://img.shields.io/github/stars/alijayanet/MGS?style=for-the-badge)](https://github.com/alijayanet/MGS/stargazers)
 
 
-## ðŸŒ About MGS
+## About MGS
 
 **MGS** is an integrated ISP management system designed to manage billing, customer service, and network operations through WhatsApp integration. This system provides end-to-end solutions for Internet Service Provider management with advanced features.
 
-### ðŸš€ Main Features
+### Main Features
 
 -  WhatsApp Gateway**: Customer interaction, voucher delivery, trouble reporting, and automated notifications
 -  GenieACS Integration**: Centralized CPE (Customer Premises Equipment) management
@@ -154,16 +154,16 @@ npm run dev
 
 ```
 MGS/
-â”œâ”€â”€ app.js                  # Application entry point
-â”œâ”€â”€ package.json            # Dependencies and scripts
-â”œâ”€â”€ config/                 # Configuration files
-â”œâ”€â”€ data/                   # Database files and backups
-â”œâ”€â”€ migrations/             # Database migration files
-â”œâ”€â”€ public/                 # Static files (CSS, JS, images)
-â”œâ”€â”€ routes/                 # API endpoints
-â”œâ”€â”€ scripts/                # Utility scripts
-â”œâ”€â”€ utils/                  # Utility functions
-â””â”€â”€ views/                  # EJS templates
+app.js                  # Application entry point
+package.json            # Dependencies and scripts
+config/                 # Configuration files
+data/                   # Database files and backups
+migrations/             # Database migration files
+public/                 # Static files (CSS, JS, images)
+routes/                 # API endpoints
+scripts/                # Utility scripts
+utils/                  # Utility functions
+views/                  # EJS templates
 ```
 
 ## Complete Documentation
