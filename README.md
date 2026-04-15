@@ -17,15 +17,15 @@
 
 ### ðŸš€ Main Features
 
-- **ðŸ“± WhatsApp Gateway**: Customer interaction, voucher delivery, trouble reporting, and automated notifications
-- **ðŸ“¡ GenieACS Integration**: Centralized CPE (Customer Premises Equipment) management
-- **ðŸ”— Mikrotik PPPoE & Hotspot Management**: User authentication and real-time bandwidth control
-- **ðŸ’³ Billing System**: Automated invoice generation payment tracking, and remittance
-- **ðŸ‘¥ Agent & Technician Management**: Flexible roles, access control, and job assignment
-- **ðŸ“‚ Database Migration**: SQL-based schema updates for continuous development
-- **ðŸ—ºï¸ Cable Network Mapping**: Visual management of ODP, poles, and cable layouts
+-  WhatsApp Gateway**: Customer interaction, voucher delivery, trouble reporting, and automated notifications
+-  GenieACS Integration**: Centralized CPE (Customer Premises Equipment) management
+-  Mikrotik PPPoE & Hotspot Management**: User authentication and real-time bandwidth control
+-  Billing System**: Automated invoice generation payment tracking, and remittance
+-  Agent & Technician Management**: Flexible roles, access control, and job assignment
+-  Database Migration**: SQL-based schema updates for continuous development
+-  Cable Network Mapping**: Visual management of ODP, poles, and cable layouts
 
-### ðŸ’¬ WhatsApp Commands
+### WhatsApp Commands
 
 The system supports WhatsApp LID (Lidded ID) registration for enhanced security and customer identification.
 
@@ -61,7 +61,7 @@ SETLID admin123
 
 > **Security:** WhatsApp LID ensures secure identification even if phone numbers change format
 
-## ðŸ› ï¸ Technologies Used
+## Technologies Used
 
 | Category | Technology |
 |----------|-----------|
@@ -73,14 +73,14 @@ SETLID admin123
 | **Payment** | Midtrans, Xendit |
 | **Logging** | Winston, Pino |
 
-## ðŸ“‹ System Prerequisites
+## System Prerequisites
 
 - **Node.js** >= 20.0.0
 - **npm** >= 6.0.0
 - **Database** SQLite (for development) or MySQL (for production)
 - **WhatsApp Business Access** (for WhatsApp Gateway features)
 
-## ðŸš€ Quick Installation
+## Quick Installation
 
 ### 1. Clone Repository
 ```bash
@@ -115,7 +115,7 @@ node scripts/verify-production-database.js
 
 After starting the application, you can access different portals through these URLs:
 
-#### ðŸ” Login Portals
+#### Login Portals
 
 | Portal | URL | Default Credentials |
 |--------|-----|-------------------|
@@ -127,7 +127,7 @@ After starting the application, you can access different portals through these U
 | **Technician (ID)** | `http://localhost:4555/teknisi/login` | Same as technician portal |
 | **Collector Portal** | `http://localhost:4555/collector/login` | Register collector via admin |
 
-#### ðŸ“± Public Features
+#### Public Features
 
 | Feature | URL | Description |
 |---------|-----|-------------|
@@ -150,7 +150,7 @@ npm start
 npm run dev
 ```
 
-## ðŸ“ Project Structure
+## Project Structure
 
 ```
 MGS/
@@ -166,7 +166,7 @@ MGS/
 â””â”€â”€ views/                  # EJS templates
 ```
 
-## ðŸ“– Complete Documentation
+## Complete Documentation
 
 | Document | Description |
 |---------|-----------|
@@ -176,7 +176,7 @@ MGS/
 | [WHATSAPP_FIX_SUMMARY.md](WHATSAPP_FIX_SUMMARY.md) | WhatsApp fixes summary |
 | [DATABASE_MIGRATION_SUMMARY.md](DATABASE_MIGRATION_SUMMARY.md) | Database migration summary |
 
-## ðŸŽ¯ How to Contribute
+## How to Contribute
 
 We welcome contributions from the community! Here's how to contribute:
 
@@ -192,7 +192,7 @@ We welcome contributions from the community! Here's how to contribute:
 - Ensure all tests pass
 - Update README if necessary
 
-## ðŸ“ž Support
+## Support
 
 If you need assistance:
 
@@ -200,15 +200,15 @@ If you need assistance:
 - Contact the development team via email
 - Join the Discord community (if available)
 
-## ðŸ“„ License
+## License
 
 This project is licensed under the ISC license - see the [LICENSE](LICENSE) file for more details.
 
-## ðŸ‘¥ Development Team
+## Development Team
 
 - **ALIJAYA Team** - [@alijayanet](https://github.com/alijayanet)
 
-## ðŸ™ Acknowledgments
+## Acknowledgments
 
 - Thanks to all contributors who have helped develop this project
 - The open source community for inspiration and support
