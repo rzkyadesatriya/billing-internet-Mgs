@@ -1,0 +1,416 @@
+<!-- Mobile Top Navbar (Only visible on mobile) -->
+<nav class="navbar navbar-expand-md navbar-dark d-md-none mobile-navbar">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center">
+            <button class="btn btn-link text-white p-0 me-3" type="button" id="sidebarToggle">
+                <i class="bi bi-list" style="font-size: 1.5rem;"></i>
+            </button>
+            <div class="d-flex flex-column ms-2">
+                <span class="navbar-brand mb-0"><%= (settings && settings.company_header) ? settings.company_header : ((typeof versionInfo !== 'undefined' && versionInfo.companyHeader) ? versionInfo.companyHeader : 'MGS-Billing') %></span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Overlay for mobile sidebar -->
+<div class="sidebar-overlay d-md-none" id="sidebarOverlay"></div>
+
+<!-- Admin Sidebar -->
+<nav class="col-md-2 sidebar d-flex flex-column" id="adminSidebar">
+    <!-- Close button for mobile -->
+    <div class="d-md-none text-end p-3">
+        <button class="btn btn-link text-white p-0" id="sidebarClose">
+            <i class="bi bi-x" style="font-size: 1.5rem;"></i>
+        </button>
+    </div>
+    
+    <!-- Logo Section -->
+    <div class="sidebar-header mb-4 text-center">
+        <div class="company-info mt-2">
+            <h6 class="company-name mb-1">
+                <%= (settings && settings.company_header) ? settings.company_header : ((typeof versionInfo !== 'undefined' && versionInfo.companyHeader) ? versionInfo.companyHeader : 'MGS-Billing') %>
+            </h6>
+        </div>
+    </div>
+    
+    <!-- Navigation Links -->
+    <a href="/admin/dashboard" class="<%= typeof page !== 'undefined' && page === 'dashboard' ? 'active' : '' %>">
+        <i class="bi bi-house"></i> Dashboard
+    </a>
+    <a href="/admin/billing/dashboard" class="<%= typeof page !== 'undefined' && page === 'billing' ? 'active' : '' %>">
+        <i class="bi bi-receipt"></i> Billing
+    </a>
+    <a href="/admin/agents" class="<%= typeof page !== 'undefined' && page === 'agents' ? 'active' : '' %>">
+        <i class="bi bi-person-badge-fill"></i> Web Agent
+    </a>
+    <a href="/admin/technicians" class="<%= typeof page !== 'undefined' && (page === 'technicians' || page === 'installations') ? 'active' : '' %>">
+        <i class="bi bi-people-fill"></i> Teknisi & Instalasi
+    </a>
+    <a href="/admin/cable-network/odp" class="<%= typeof page !== 'undefined' && (page === 'cable-network-odp' || page === 'cable-network-cables' || page === 'cable-network-analytics') ? 'active' : '' %>">
+        <i class="bi bi-diagram-3"></i> Jaringan Kabel
+    </a>
+    <a href="/admin/billing/mapping-new" class="<%= typeof page !== 'undefined' && page === 'mapping-new' ? 'active' : '' %>">
+        <i class="bi bi-map"></i> Network Mapping
+    </a>
+    <a href="/admin/genieacs" class="<%= typeof page !== 'undefined' && page === 'genieacs' ? 'active' : '' %>">
+        <i class="bi bi-hdd-network"></i> GenieACS
+    </a>
+    <a href="/admin/mikrotik" class="<%= typeof page !== 'undefined' && (page === 'mikrotik' || page === 'mikrotik-profiles' || page === 'hotspot-profiles' || page === 'hotspot' || page === 'voucher') ? 'active' : '' %>">
+        <i class="bi bi-router"></i> Mikrotik
+    </a>
+    <a href="/admin/trouble" class="<%= typeof page !== 'undefined' && page === 'trouble' ? 'active' : '' %>">
+        <i class="bi bi-exclamation-triangle"></i> Trouble Report
+    </a>
+    <a href="/admin/settings" class="<%= typeof page !== 'undefined' && page === 'setting' ? 'active' : '' %>">
+        <i class="bi bi-gear"></i> Setting
+    </a>
+    <a href="/admin/cache" class="<%= typeof page !== 'undefined' && page === 'cache' ? 'active' : '' %>">
+        <i class="bi bi-database"></i> Cache Management
+    </a>
+    <a href="/admin/logout">
+        <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+</nav>
+
+<style>
+:root {
+    --menu-light: #F5F7FB;
+    --menu-blue: #1F4E8C;
+    --menu-accent: #00A37A;
+}
+
+/* Mobile Top Navbar */
+.mobile-navbar {
+    background: var(--menu-blue);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.mobile-navbar .navbar-brand {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Sidebar */
+.sidebar {
+    min-height: 100vh;
+    background: var(--menu-blue);
+    color: var(--menu-light);
+    padding-top: 32px;
+}
+
+.sidebar a {
+    color: var(--menu-light);
+    text-decoration: none;
+    display: block;
+    padding: 12px 24px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar a.active, 
+.sidebar a:hover {
+    background: var(--menu-accent);
+    transform: translateX(3px);
+}
+
+.sidebar a i {
+    margin-right: 8px;
+    width: 16px;
+}
+
+/* Submenu */
+.submenu {
+    display: none;
+    padding-left: 32px;
+    margin-bottom: 8px;
+}
+
+.submenu.show {
+    display: block;
+}
+
+.submenu a {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+}
+
+/* Submenu indicator */
+.sidebar a[data-toggle="submenu"]::after {
+    content: '▾';
+    float: right;
+    transition: transform 0.3s ease;
+}
+
+.sidebar a[data-toggle="submenu"].collapsed::after {
+    transform: rotate(-90deg);
+}
+
+/* Sidebar Header */
+.sidebar .sidebar-header {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 0 24px 24px 24px;
+    border-bottom: 1px solid rgba(239, 250, 253, 0.35);
+    margin-bottom: 1rem;
+}
+
+.sidebar-header img {
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header img:hover {
+    transform: scale(1.05);
+}
+
+.company-info {
+    color: var(--menu-light);
+}
+
+.company-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--menu-light);
+    line-height: 1.2;
+}
+
+/* Main Content */
+.main-content {
+    padding: 32px 24px;
+}
+
+/* Hamburger Button (Desktop) */
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: var(--menu-blue);
+    color: var(--menu-light);
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 1.2rem;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Mobile responsive */
+@media (max-width: 767.98px) {
+    .main-content {
+        margin-left: 0;
+        margin-top: 60px; /* Space for mobile navbar */
+        padding: 15px;
+    }
+    
+    .sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        z-index: 1000 !important;
+        width: 280px !important;
+        height: 100vh !important;
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s ease !important;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.3) !important;
+        overflow: hidden !important;
+        padding-top: 0 !important;
+    }
+    
+    .sidebar.show {
+        transform: translateX(0) !important;
+    }
+    
+    .sidebar .sidebar-header {
+        margin-top: 20px !important;
+        padding-top: 20px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    /* Enable scrolling for sidebar content */
+    .sidebar {
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    /* Ensure all sidebar content is scrollable */
+    .sidebar > * {
+        flex-shrink: 0 !important;
+    }
+    
+    /* Adjust content for better mobile view */
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .table-responsive {
+        border-radius: 10px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 575.98px) {
+    .main-content {
+        padding: 10px;
+    }
+    
+    .sidebar {
+        width: 260px !important;
+    }
+    
+    .mobile-navbar .navbar-brand {
+        font-size: 1rem;
+    }
+}
+
+/* Desktop specific */
+@media (min-width: 768px) {
+    .main-content {
+        margin-left: 16.666667%; /* col-md-2 width */
+    }
+    
+    .sidebar {
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+}
+
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebarClose = document.getElementById('sidebarClose');
+    const sidebar = document.getElementById('adminSidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    const hamburger = document.getElementById('hamburgerBtn'); // Desktop hamburger if exists
+    
+    // Toggle sidebar on mobile hamburger click
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', function() {
+            sidebar.classList.add('show');
+            overlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    
+    // Desktop hamburger support (for existing functionality)
+    if (hamburger) {
+        hamburger.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+            overlay.classList.toggle('show');
+        });
+    }
+    
+    // Close sidebar functions
+    function closeSidebar() {
+        sidebar.classList.remove('show');
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+    
+    // Close sidebar on close button click
+    if (sidebarClose) {
+        sidebarClose.addEventListener('click', closeSidebar);
+    }
+    
+    // Close sidebar on overlay click
+    if (overlay) {
+        overlay.addEventListener('click', closeSidebar);
+    }
+    
+    // Close sidebar when clicking on nav links (mobile)
+    const navLinks = sidebar.querySelectorAll('a:not(#restartMikrotikBtn)');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth < 768) {
+                setTimeout(closeSidebar, 100);
+            }
+        });
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768) {
+            closeSidebar();
+        }
+    });
+    
+    // Restart Mikrotik functionality (preserve existing functionality)
+    const restartBtn = document.getElementById('restartMikrotikBtn');
+    if (restartBtn) {
+        restartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Apakah Anda yakin ingin restart Mikrotik?')) {
+                fetch('/admin/mikrotik/restart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Mikrotik berhasil direstart');
+                    } else {
+                        alert('Gagal restart Mikrotik: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat restart Mikrotik');
+                });
+            }
+        });
+    }
+    
+    // Submenu toggle functionality
+    const submenuToggle = document.querySelector('[data-toggle="submenu"]');
+    if (submenuToggle) {
+        submenuToggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const submenu = this.nextElementSibling;
+            if (submenu && submenu.classList.contains('submenu')) {
+                submenu.classList.toggle('show');
+                this.classList.toggle('collapsed');
+            }
+        });
+    }
+});
+</script>
+

@@ -1,0 +1,228 @@
+<<<<<<< HEAD
+# billing-internet
+=======
+﻿ 
+  # MGS
+  **Integrated ISP Management System**
+  
+  [![Node.js](https://img.shields.io/badge/Node.js-18.x-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
+  [![License](https://img.shields.io/badge/license-ISC-blue?style=for-the-badge)](LICENSE)
+  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge)](https://github.com/alijayanet/MGS/pulls)
+  [![GitHub Stars](https://img.shields.io/github/stars/alijayanet/MGS?style=for-the-badge)](https://github.com/alijayanet/MGS/stargazers)
+
+
+## ðŸŒ About MGS
+
+**MGS** is an integrated ISP management system designed to manage billing, customer service, and network operations through WhatsApp integration. This system provides end-to-end solutions for Internet Service Provider management with advanced features.
+
+### ðŸš€ Main Features
+
+- **ðŸ“± WhatsApp Gateway**: Customer interaction, voucher delivery, trouble reporting, and automated notifications
+- **ðŸ“¡ GenieACS Integration**: Centralized CPE (Customer Premises Equipment) management
+- **ðŸ”— Mikrotik PPPoE & Hotspot Management**: User authentication and real-time bandwidth control
+- **ðŸ’³ Billing System**: Automated invoice generation payment tracking, and remittance
+- **ðŸ‘¥ Agent & Technician Management**: Flexible roles, access control, and job assignment
+- **ðŸ“‚ Database Migration**: SQL-based schema updates for continuous development
+- **ðŸ—ºï¸ Cable Network Mapping**: Visual management of ODP, poles, and cable layouts
+
+### ðŸ’¬ WhatsApp Commands
+
+The system supports WhatsApp LID (Lidded ID) registration for enhanced security and customer identification.
+
+#### For Customers
+
+| Command | Format | Description |
+|---------|--------|-------------|
+| **REG** | `REG [nama/nomor]` | Link WhatsApp LID to existing customer account |
+| **DAFTAR** | `DAFTAR [Nama]#[NoHP]#[Alamat]#[ID_Paket]` | Register as new customer with complete data |
+| **STATUS** | `STATUS` | Check billing and service status |
+| **MENU** | `MENU` | Display available customer commands |
+
+**Examples:**
+```
+REG Budi Santoso
+REG 081234567890
+DAFTAR Agus Setiawan#08123456789#Jl. Melati No 5#1
+```
+
+#### For Admins
+
+| Command | Format | Description |
+|---------|--------|-------------|
+| **SETLID** | `SETLID [password]`[nomer admin]| Save admin WhatsApp LID to settings (requires admin password) |
+| **MENU** | `MENU` or `ADMIN` | Display admin menu |
+
+**Examples:**
+```
+SETLID admin123
+```
+
+> **Note:** Admin password is configured in `settings.json` as `admin_password`
+
+> **Security:** WhatsApp LID ensures secure identification even if phone numbers change format
+
+## ðŸ› ï¸ Technologies Used
+
+| Category | Technology |
+|----------|-----------|
+| **Backend** | Node.js, Express |
+| **Database** | SQLite (development), MySQL (production) |
+| **Frontend** | EJS, HTML5, CSS3, JavaScript |
+| **WhatsApp** | [@whiskeysockets/baileys](https://github.com/WhiskeySockets/Baileys) |
+| **Network** | Node-routeros for Mikrotik |
+| **Payment** | Midtrans, Xendit |
+| **Logging** | Winston, Pino |
+
+## ðŸ“‹ System Prerequisites
+
+- **Node.js** >= 20.0.0
+- **npm** >= 6.0.0
+- **Database** SQLite (for development) or MySQL (for production)
+- **WhatsApp Business Access** (for WhatsApp Gateway features)
+
+## ðŸš€ Quick Installation
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/alijayanet/MGS.git
+```
+```bash
+cd MGS
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Initialize Database
+```bash
+npm run setup
+```
+
+### 4. Run Database Migration (Important for New Servers)
+To ensure all required tables and columns exist in the database, run migration commands:
+
+```bash
+# Run all database migrations
+node scripts/run-all-migrations.js
+
+# Verify database structure
+node scripts/verify-production-database.js
+```
+
+### 5. Access the Application
+
+After starting the application, you can access different portals through these URLs:
+
+#### ðŸ” Login Portals
+
+| Portal | URL | Default Credentials |
+|--------|-----|-------------------|
+| **Customer Portal** | `http://localhost:4555/customer/login` | Use customer username & phone |
+| **Admin Portal** | `http://localhost:4555/admin/login` | Username: `admin` / Password: `admin` |
+| **Admin Mobile** | `http://localhost:4555/admin/login/mobile` | Same as admin portal |
+| **Agent Portal** | `http://localhost:4555/agent/login` | Register agent first via admin |
+| **Technician Portal** | `http://localhost:4555/technician/login` | Register technician via admin |
+| **Technician (ID)** | `http://localhost:4555/teknisi/login` | Same as technician portal |
+| **Collector Portal** | `http://localhost:4555/collector/login` | Register collector via admin |
+
+#### ðŸ“± Public Features
+
+| Feature | URL | Description |
+|---------|-----|-------------|
+| **Voucher Purchase** | `http://localhost:4555/voucher` | Public voucher purchase page |
+| **Trouble Report** | `http://localhost:4555/customer/trouble` | Customer trouble reporting |
+| **WhatsApp Status** | `http://localhost:4555/whatsapp/status` | Check WhatsApp connection status |
+| **API Health Check** | `http://localhost:4555/health` | Server health status |
+
+> **Note:** Replace `localhost:4555` with your server IP/domain. Port `4555` can be changed in `settings.json`
+
+> **Security:** Change default admin credentials immediately after first login via Settings menu
+
+### 6. Run Application
+```bash
+# For production
+npm start
+```
+# For development
+```bash
+npm run dev
+```
+
+## ðŸ“ Project Structure
+
+```
+MGS/
+â”œâ”€â”€ app.js                  # Application entry point
+â”œâ”€â”€ package.json            # Dependencies and scripts
+â”œâ”€â”€ config/                 # Configuration files
+â”œâ”€â”€ data/                   # Database files and backups
+â”œâ”€â”€ migrations/             # Database migration files
+â”œâ”€â”€ public/                 # Static files (CSS, JS, images)
+â”œâ”€â”€ routes/                 # API endpoints
+â”œâ”€â”€ scripts/                # Utility scripts
+â”œâ”€â”€ utils/                  # Utility functions
+â””â”€â”€ views/                  # EJS templates
+```
+
+## ðŸ“– Complete Documentation
+
+| Document | Description |
+|---------|-----------|
+| [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) | Complete guide for deployment on new servers |
+| [DATA_README.md](DATA_README.md) | Information about data management |
+| [WHATSAPP_SETUP.md](WHATSAPP_SETUP.md) | WhatsApp Gateway configuration |
+| [WHATSAPP_FIX_SUMMARY.md](WHATSAPP_FIX_SUMMARY.md) | WhatsApp fixes summary |
+| [DATABASE_MIGRATION_SUMMARY.md](DATABASE_MIGRATION_SUMMARY.md) | Database migration summary |
+
+## ðŸŽ¯ How to Contribute
+
+We welcome contributions from the community! Here's how to contribute:
+
+1. **Fork** this repository
+2. Create a **feature branch** (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to the branch (`git push origin feature/AmazingFeature`)
+5. Open a **Pull Request**
+
+### Contribution Guidelines
+- Follow the existing code style
+- Add documentation for new features
+- Ensure all tests pass
+- Update README if necessary
+
+## ðŸ“ž Support
+
+If you need assistance:
+
+- Create an **issue** at [GitHub Issues](https://github.com/alijayanet/MGS/issues)
+- Contact the development team via email
+- Join the Discord community (if available)
+
+## ðŸ“„ License
+
+This project is licensed under the ISC license - see the [LICENSE](LICENSE) file for more details.
+
+## ðŸ‘¥ Development Team
+
+- **ALIJAYA Team** - [@alijayanet](https://github.com/alijayanet)
+
+## ðŸ™ Acknowledgments
+
+- Thanks to all contributors who have helped develop this project
+- The open source community for inspiration and support
+
+---
+
+  
+  ðŸ’» Developed with â¤ï¸ for the ISP community
+  
+  [Report Bug](https://github.com/alijayanet/MGS/issues) Â· [Request Feature](https://github.com/alijayanet/MGS/issues) Â· [Documentation](DEPLOYMENT_GUIDE.md)
+  
+
+
+
+
+
+>>>>>>> b0fefeb6 (Initial commit: Project Billing MGS)

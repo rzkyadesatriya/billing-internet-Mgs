@@ -1,0 +1,31 @@
+﻿{
+  "version": "2.1.8",
+  "version_name": "Multi Router Mikrotik",
+  "version_date": "2026-04-10",
+  "version_notes": "Added multi-router Mikrotik support: router selection in admin pages (Mikrotik/Hotspot/Voucher/Settings), PPPoE monitoring per-router, and config validation compatible with legacy single-router settings.",
+  "build_number": "20260410",
+  "changelog": [
+    "v2.1.8 - Multi Router Mikrotik (2026-04-10)",
+    "- Added multi-router configuration via Admin Settings (mikrotik_routers + default router)",
+    "- Added router selector & routerId propagation on hotspot voucher page",
+    "- PPPoE monitoring and notifications now include router context",
+    "v2.1.7 - Duitku Payment Gateway (2026-04-10)",
+    "- Added Duitku gateway (create payment + webhook) with admin configuration UI",
+    "- Customer payments now follow admin active gateway and show methods for that gateway",
+    "v2.1.6 - Customer Portal Password (2026-04-08)",
+    "- Customer portal login now requires phone + password (default 123456)",
+    "- Customer can change portal password from profile page",
+    "- Admin can reset customer portal password to default from customer list/detail",
+    "v2.1.5 - WhatsApp Agent + Mapping (2026-01-29)",
+    "- Added agent system with WhatsApp integration",
+    "- Added network mapping feature",
+    "- Added collector profile with transaction statistics",
+    "- Fixed voucher pricing display issues",
+    "- Improved MikHmon scheduler compatibility"
+  ],
+  "github": {
+    "repo": "https://api.github.com/repos/MGS/MGS/releases/latest",
+    "url": "https://github.com/MGS/MGS/releases"
+  }
+}
+
