@@ -10,6 +10,57 @@ const {
   getTroubleReportById
 } = require('../config/troubleReport');
 
+function normalizePhone(input) {
+  if (!input) return '';
+  let s = String(input).replace(/[^0-9+]/g, '');
+  if (s.startsWith('+')) s = s.slice(1);
+  if (s.startsWith('0')) return '62' + s.slice(1);
+  if (s.startsWith('62')) return s;
+  if (/^8[0-9]{7,13}$/.test(s)) return '62' + s;
+  return s;
+}
+
+async function withTimeout(taskPromise, timeoutMs = 4500, message = 'Request timeout') {
+  let timer = null;
+  try {
+    return await Promise.race([
+      taskPromise,
+      new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error(message)), timeoutMs);
+      })
+    ]);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
+const troubleDeviceCache = new Map();
+
+async function findDeviceByTagCached(phone, timeoutMs = 4500, ttlMs = 30000, maxStaleMs = 300000) {
+  const key = normalizePhone(phone);
+  const now = Date.now();
+  const cached = troubleDeviceCache.get(key);
+
+  if (cached && (now - cached.ts) < ttlMs) {
+    return cached.data;
+  }
+
+  try {
+    const device = await withTimeout(
+      findDeviceByTag(phone),
+      timeoutMs,
+      'Timeout saat mencari data perangkat dari GenieACS'
+    );
+    troubleDeviceCache.set(key, { ts: now, data: device || null });
+    return device || null;
+  } catch (_) {
+    if (cached && (now - cached.ts) < maxStaleMs) {
+      return cached.data;
+    }
+    return null;
+  }
+}
+
 // Middleware untuk memastikan pelanggan sudah login
 function customerAuth(req, res, next) {
   console.log('🔍 customerAuth middleware - Session:', req.session);
@@ -43,10 +94,10 @@ function customerAuth(req, res, next) {
 
 // GET: Halaman form laporan gangguan
 router.get('/report', customerAuth, async (req, res) => {
-  const phone = req.session.phone;
+  const phone = req.session.phone || req.session.customer_phone;
   
   // Dapatkan data pelanggan dari GenieACS
-  const device = await findDeviceByTag(phone);
+  const device = await findDeviceByTagCached(phone, 4500, 30000, 300000);
   const customerName = device?.Tags?.find(tag => tag !== phone) || '';
   const location = device?.Tags?.join(', ') || '';
   

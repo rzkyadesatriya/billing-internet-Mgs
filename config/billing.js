@@ -2726,7 +2726,7 @@ class BillingManager {
     // Voucher cleanup methods
     async cleanupExpiredVoucherInvoices() {
         return new Promise((resolve, reject) => {
-            const { getSetting } = require('./settings');
+            const { getSetting } = require('./settingsManager');
             const cleanupEnabled = getSetting('voucher_cleanup.enabled', true);
             const expiryHours = parseInt(getSetting('voucher_cleanup.expiry_hours', '24'));
             const deleteInvoices = getSetting('voucher_cleanup.delete_expired_invoices', true);
@@ -2836,7 +2836,7 @@ class BillingManager {
 
     async getExpiredVoucherInvoices() {
         return new Promise((resolve, reject) => {
-            const { getSetting } = require('./settings');
+            const { getSetting } = require('./settingsManager');
             const expiryHours = parseInt(getSetting('voucher_cleanup.expiry_hours', '24'));
 
             const expiryTime = new Date();

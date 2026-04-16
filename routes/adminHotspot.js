@@ -25,6 +25,7 @@ async function withTimeout(taskPromise, timeoutMs = 7000, message = 'Mikrotik ti
 }
 
 const hotspotAllUsersCache = new Map();
+const activeHotspotUsersCache = new Map();
 
 function getRouterCacheKey(routerId) {
     return String(routerId || '__default__');
@@ -32,6 +33,33 @@ function getRouterCacheKey(routerId) {
 
 function invalidateHotspotUsersCache(routerId) {
     hotspotAllUsersCache.delete(getRouterCacheKey(routerId));
+    activeHotspotUsersCache.delete(getRouterCacheKey(routerId));
+}
+
+async function getActiveHotspotUsersSafe(routerOptions = {}, timeoutMs = 5000, ttlMs = 15000) {
+    const cacheKey = getRouterCacheKey(routerOptions.routerId);
+    const cached = activeHotspotUsersCache.get(cacheKey);
+    const now = Date.now();
+
+    if (cached && (now - cached.ts) < ttlMs) {
+        return cached.data;
+    }
+
+    try {
+        const result = await withTimeout(
+            getActiveHotspotUsers(routerOptions),
+            timeoutMs,
+            'Timeout saat mengambil user hotspot aktif dari Mikrotik'
+        );
+        const data = (result && result.success && Array.isArray(result.data)) ? result.data : [];
+        activeHotspotUsersCache.set(cacheKey, { ts: now, data });
+        return data;
+    } catch (_) {
+        if (cached && Array.isArray(cached.data)) {
+            return cached.data;
+        }
+        return [];
+    }
 }
 
 async function fetchAllHotspotUsers(routerOptions = {}) {
@@ -433,15 +461,9 @@ router.post('/generate-vouchers', async (req, res) => {
 router.get('/active-users', async (req, res) => {
     try {
         const routerId = getRouterIdFromReq(req);
-        const result = await getActiveHotspotUsers({ routerId });
-        if (result.success) {
-            // Hitung jumlah user yang aktif dari data array
-            const activeCount = Array.isArray(result.data) ? result.data.length : 0;
-            res.json({ success: true, activeUsers: activeCount, activeUsersList: result.data });
-        } else {
-            console.error('Failed to get active hotspot users:', result.message);
-            res.status(500).json({ success: false, message: result.message });
-        }
+        const data = await getActiveHotspotUsersSafe({ routerId }, 5000, 15000);
+        const activeCount = Array.isArray(data) ? data.length : 0;
+        res.json({ success: true, activeUsers: activeCount, activeUsersList: data });
     } catch (error) {
         console.error('Error getting active hotspot users:', error);
         res.status(500).json({ success: false, message: error.message });
@@ -452,12 +474,8 @@ router.get('/active-users', async (req, res) => {
 router.get('/active-users-detail', async (req, res) => {
     try {
         const routerId = getRouterIdFromReq(req);
-        const result = await getActiveHotspotUsers({ routerId });
-        if (result.success) {
-            res.json({ success: true, activeUsers: result.data });
-        } else {
-            res.status(500).json({ success: false, message: result.message });
-        }
+        const data = await getActiveHotspotUsersSafe({ routerId }, 5000, 15000);
+        res.json({ success: true, activeUsers: data });
     } catch (error) {
         console.error('Error getting active hotspot users detail:', error);
         res.status(500).json({ success: false, message: error.message });
@@ -481,25 +499,6 @@ router.post('/disconnect-user', async (req, res) => {
         }
     } catch (error) {
         console.error('Error disconnecting hotspot user:', error);
-        res.status(500).json({ success: false, message: error.message });
-    }
-});
-
-// GET: Ambil data user hotspot aktif untuk AJAX
-router.get('/active-users', async (req, res) => {
-    try {
-        const routerId = getRouterIdFromReq(req);
-        const result = await getActiveHotspotUsers({ routerId });
-        if (result.success) {
-            // Log data untuk debugging
-            console.log('Active users data:', JSON.stringify(result.data).substring(0, 200) + '...');
-            res.json({ success: true, activeUsersList: result.data });
-        } else {
-            console.error('Failed to get active users:', result.message);
-            res.status(500).json({ success: false, message: result.message });
-        }
-    } catch (error) {
-        console.error('Error getting active hotspot users:', error);
         res.status(500).json({ success: false, message: error.message });
     }
 });

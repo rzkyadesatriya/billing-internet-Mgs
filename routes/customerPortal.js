@@ -23,6 +23,42 @@ async function withTimeout(taskPromise, timeoutMs = 10000, message = 'Request ti
   }
 }
 
+function acceptsJson(req) {
+  const acceptHeader = (req && req.headers && typeof req.headers.accept === 'string')
+    ? req.headers.accept
+    : '';
+  return !!(req && req.xhr) || acceptHeader.indexOf('json') > -1;
+}
+
+const customerDashboardCache = new Map();
+
+async function getCustomerDeviceDataCached(phone, timeoutMs = 6000, ttlMs = 30000, maxStaleMs = 300000) {
+  const cacheKey = normalizePhone(phone);
+  const now = Date.now();
+  const cached = customerDashboardCache.get(cacheKey);
+
+  if (cached && (now - cached.ts) < ttlMs) {
+    return cached.data;
+  }
+
+  try {
+    const data = await withTimeout(
+      getCustomerDeviceData(phone),
+      timeoutMs,
+      'Timeout saat memuat data perangkat pelanggan'
+    );
+    if (data) {
+      customerDashboardCache.set(cacheKey, { ts: now, data });
+    }
+    return data;
+  } catch (error) {
+    if (cached && (now - cached.ts) < maxStaleMs) {
+      return cached.data;
+    }
+    throw error;
+  }
+}
+
 async function tryAutoLoginCustomer(req) {
   const autoEnabled = getSetting('customer_auto_login', false);
   const enabled = autoEnabled === true || String(autoEnabled).toLowerCase() === 'true';
@@ -905,7 +941,7 @@ router.post('/login', async (req, res) => {
     // Fast validation: terima 08..., 62..., +62...
     const valid = !!phone && (/^08[0-9]{8,13}$/.test(phone) || /^\+?62[0-9]{8,13}$/.test(phone));
     if (!valid) {
-      if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+      if (acceptsJson(req)) {
         return res.status(400).json({ success: false, message: 'Nomor HP harus valid (08..., 62..., atau +62...)' });
       } else {
         return res.render('login', { settings, error: 'Nomor HP tidak valid.' });
@@ -914,7 +950,7 @@ router.post('/login', async (req, res) => {
 
     const pass = String(password || '').trim();
     if (!pass) {
-      if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+      if (acceptsJson(req)) {
         return res.status(400).json({ success: false, message: 'Password harus diisi' });
       } else {
         return res.render('login', { settings, error: 'Password harus diisi.' });
@@ -925,7 +961,7 @@ router.post('/login', async (req, res) => {
 
     const customer = await billingManager.getCustomerByPhone(normalizedPhone);
     if (!customer) {
-      if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+      if (acceptsJson(req)) {
         return res.status(401).json({ success: false, message: 'Nomor HP tidak terdaftar.' });
       } else {
         return res.render('login', { settings, error: 'Nomor HP tidak valid atau belum terdaftar.' });
@@ -934,7 +970,7 @@ router.post('/login', async (req, res) => {
 
     const expectedPassword = (customer.password && String(customer.password).trim()) ? String(customer.password).trim() : '123456';
     if (pass !== expectedPassword) {
-      if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+      if (acceptsJson(req)) {
         return res.status(401).json({ success: false, message: 'Password salah.' });
       } else {
         return res.render('login', { settings, error: 'Password salah.' });
@@ -971,7 +1007,7 @@ router.post('/login', async (req, res) => {
         console.error(`Gagal mengirim OTP ke ${normalizePhone(customer.phone)}:`, error);
       }
       
-      if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+      if (acceptsJson(req)) {
         return res.json({ success: true, message: 'OTP berhasil dikirim', redirect: `/customer/otp?phone=${encodeURIComponent(normalizePhone(customer.phone))}` });
       } else {
         return res.render('otp', { phone: normalizePhone(customer.phone), error: null, otp_length: otpLength, settings });
@@ -998,7 +1034,7 @@ router.post('/login', async (req, res) => {
         });
       });
       
-      if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+      if (acceptsJson(req)) {
         return res.json({ success: true, message: 'Login berhasil', redirect: '/customer/dashboard' });
       } else {
         return res.redirect('/customer/dashboard');
@@ -1007,7 +1043,7 @@ router.post('/login', async (req, res) => {
   } catch (error) {
     console.error('Login error:', error);
     
-    if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+    if (acceptsJson(req)) {
       return res.status(500).json({ success: false, message: 'Terjadi kesalahan saat login' });
     } else {
       return res.render('login', { settings: getSettingsWithCache(), error: 'Terjadi kesalahan saat login.' });
@@ -1336,11 +1372,7 @@ router.get('/dashboard', async (req, res) => {
   const settings = getSettingsWithCache();
   
   try {
-    const data = await withTimeout(
-      getCustomerDeviceData(phone),
-      12000,
-      'Timeout saat memuat data perangkat pelanggan'
-    );
+    const data = await getCustomerDeviceDataCached(phone, 6000, 30000, 300000);
     
     // Pastikan data tidak null
     if (!data) {
@@ -1544,7 +1576,7 @@ router.get('/dashboard/mobile', async (req, res) => {
   if (!phone) return res.redirect('/customer/login');
   const settings = getSettingsWithCache();
   try {
-    const data = await getCustomerDeviceData(phone);
+    const data = await getCustomerDeviceDataCached(phone, 6000, 30000, 300000);
     if (!data) {
       return res.render('dashboard-mobile', {
         customer: { phone, ssid: '-', status: 'Tidak ditemukan', lastInform: '-' },
@@ -1584,6 +1616,7 @@ router.get('/dashboard/mobile', async (req, res) => {
     });
   }
 });
+
 
 
 

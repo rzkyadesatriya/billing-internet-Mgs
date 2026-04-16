@@ -11,7 +11,7 @@ const express = require('express');
 const router = express.Router();
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
-const adminAuth = require('../../middleware/adminAuth');
+const { adminAuth } = require('./adminAuth');
 
 // Helper function untuk mendapatkan nilai parameter dari device
 function getParameterValue(device, parameterPath) {

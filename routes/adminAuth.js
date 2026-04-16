@@ -3,6 +3,13 @@ const router = express.Router();
 const { getSetting } = require('../config/settingsManager');
 const { validateConfiguration, getValidationSummary, checkForDefaultSettings } = require('../config/configValidator');
 
+function acceptsJson(req) {
+  const acceptHeader = (req && req.headers && typeof req.headers.accept === 'string')
+    ? req.headers.accept
+    : '';
+  return !!(req && req.xhr) || acceptHeader.indexOf('json') > -1;
+}
+
 // function getAdminCredentials removed, using getSetting directly in login route
 // Cache removed to fix issue where password changes are not reflected immediately
 // settingsManager already handles file I/O caching efficiently
@@ -48,7 +55,7 @@ router.post('/login', async (req, res) => {
 
     // Fast validation
     if (!username || !password) {
-      if (req.xhr || req.headers.accept.indexOf('json') > -1) {
+      if (acceptsJson(req)) {
         return res.status(400).json({ success: false, message: 'Username dan password harus diisi!' });
       } else {
         return res.render('adminLogin', { error: 'Username dan password harus diisi!' });
@@ -97,14 +104,14 @@ router.post('/login', async (req, res) => {
       });
 
       // Fast response untuk AJAX
-      if (req.xhr || (req.headers.accept && req.headers.accept.indexOf('json') > -1)) {
+      if (acceptsJson(req)) {
         res.json({ success: true, message: 'Login berhasil!' });
       } else {
         res.redirect('/admin/dashboard');
       }
     } else {
       // Fast error response
-      if (req.xhr || (req.headers.accept && req.headers.accept.indexOf('json') > -1)) {
+      if (acceptsJson(req)) {
         res.status(401).json({ success: false, message: 'Username atau password salah!' });
       } else {
         res.render('adminLogin', { error: 'Username atau password salah.' });
@@ -113,7 +120,7 @@ router.post('/login', async (req, res) => {
   } catch (error) {
     console.error('Login error:', error);
 
-    if (req.xhr || (req.headers.accept && req.headers.accept.indexOf('json') > -1)) {
+    if (acceptsJson(req)) {
       res.status(500).json({ success: false, message: 'Terjadi kesalahan saat login!' });
     } else {
       res.render('adminLogin', { error: 'Terjadi kesalahan saat login.' });
