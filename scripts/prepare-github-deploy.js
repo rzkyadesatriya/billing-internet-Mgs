@@ -157,7 +157,7 @@ echo "ðŸŽ‰ Deploy selesai!"
             "rx_power_notification_enable": true,
             "rx_power_warning_interval": "36000000",
             "company_header": "MGS-Billing",
-            "footer_info": "Info Hubungi : 081947215703",
+            "footer_info": "Info Hubungi : 085778015569",
             "app_name": "MGS-Billing",
             "customerPortalOtp": false,
             "otp_length": "4",
@@ -179,7 +179,7 @@ echo "ðŸŽ‰ Deploy selesai!"
             "offline_device_threshold_hours": "24",
             "user_auth_mode": "mikrotik",
             "logo_filename": "logo.png",
-            "company_website": "https://alijaya.net",
+            "company_website": "https://mgs.net",
             "company_slogan": "Solusi Internet Terdepan",
             "invoice_notes": "Pembayaran dapat dilakukan melalui transfer bank atau pembayaran tunai di kantor kami. Terima kasih atas kepercayaan Anda.",
             "payment_bank_name": "BRI",
@@ -188,9 +188,9 @@ echo "ðŸŽ‰ Deploy selesai!"
             "payment_cash_address": "Jl. Pantai Tanjungpura Desa Ujunggebang",
             "payment_cash_hours": "08:00 - 20:00",
             "contact_phone": "081-9472-15703",
-            "contact_email": "alijayanet@gmail.com",
+            "contact_email": "mgs@gmail.com",
             "contact_address": "Jl. Pantai Tanjungpura Desa Ujunggebang",
-            "contact_whatsapp": "081947215703",
+            "contact_whatsapp": "085778015569",
             "payment_gateway": {
                 "active": "midtrans",
                 "midtrans": {
@@ -380,7 +380,7 @@ pm2 restart MGS
 
 - **Documentation**: README.md
 - **Issues**: GitHub Issues
-- **Contact**: 081947215703
+- **Contact**: 085778015569
 
 ---
 

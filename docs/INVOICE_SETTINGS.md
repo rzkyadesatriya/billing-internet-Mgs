@@ -22,7 +22,7 @@ Dokumen ini menjelaskan semua field settings yang digunakan untuk mengkustomisas
 ### 2. Footer Information
 ```json
 {
-  "footer_info": "Info Hubungi : 081947215703"
+  "footer_info": "Info Hubungi : 085778015569"
 }
 ```
 
@@ -53,7 +53,7 @@ Dokumen ini menjelaskan semua field settings yang digunakan untuk mengkustomisas
   "contact_phone": "0812-3456-7890",
   "contact_email": "info@example.com",
   "contact_address": "Jl. Contoh No. 123, Kota",
-  "contact_whatsapp": "081947215703"
+  "contact_whatsapp": "085778015569"
 }
 ```
 
@@ -66,7 +66,7 @@ Dokumen ini menjelaskan semua field settings yang digunakan untuk mengkustomisas
 ### 5. Company Additional Info
 ```json
 {
-  "company_website": "https://alijaya.net",
+  "company_website": "https://mgs.com",
   "invoice_notes": "Pembayaran dapat dilakukan melalui transfer bank atau pembayaran tunai di kantor kami. Terima kasih atas kepercayaan Anda."
 }
 ```
@@ -247,7 +247,7 @@ console.log(require('./config/settingsManager').getSettingsWithCache());
 ### Contact
 - **Developer**: Admin System
 - **Email**: info@example.com
-- **WhatsApp**: 081947215703
+- **WhatsApp**: 085778015569
 
 ### Documentation
 - **Invoice System**: `/docs/INVOICE_SYSTEM.md`

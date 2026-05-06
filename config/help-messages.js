@@ -311,7 +311,7 @@ function getVersionInfo() {
         versionNotes: settings.version_notes || 'No release notes',
         buildNumber: settings.build_number || 'Unknown Build',
         companyHeader: settings.company_header || 'MAYA GLOBAL SOLUTION',
-        footerInfo: settings.footer_info || 'Info Hubungi : 081947215703'
+        footerInfo: settings.footer_info || 'Info Hubungi : 085778015569'
     };
 }
 

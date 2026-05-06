@@ -2536,7 +2536,7 @@ router.post('/whatsapp-settings/test', async (req, res) => {
                 disruption_type: 'Gangguan Jaringan',
                 affected_area: 'Seluruh Area',
                 estimated_resolution: '2 jam',
-                support_phone: getSetting('contact_whatsapp', '081947215703')
+                support_phone: getSetting('contact_whatsapp', '085778015569')
             },
             service_announcement: {
                 announcement_content: 'Pengumuman penting untuk semua pelanggan.'
@@ -2555,7 +2555,7 @@ router.post('/whatsapp-settings/test', async (req, res) => {
                 package_name: 'Paket Premium',
                 package_speed: '50 Mbps',
                 wifi_password: 'test123456',
-                support_phone: getSetting('contact_whatsapp', '081947215703')
+                support_phone: getSetting('contact_whatsapp', '085778015569')
             }
         };
 

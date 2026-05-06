@@ -540,7 +540,7 @@ async function newServerSetup() {
         console.log('\n⚙️  Step 7: Creating app settings...');
         const settings = [
             { key: 'company_name', value: 'MAYA GLOBAL SOLUTION' },
-            { key: 'company_phone', value: '081947215703' },
+            { key: 'company_phone', value: '085778015569' },
             { key: 'company_email', value: 'info@alijaya.com' },
             { key: 'company_address', value: 'Jl. Contoh Alamat No. 123' },
             { key: 'default_commission_rate', value: '10' },

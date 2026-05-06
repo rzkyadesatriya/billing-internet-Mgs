@@ -473,7 +473,7 @@ Permintaan bantuan Anda telah diterima:
 
 Tim support akan segera menghubungi Anda.
 
-📞 *Support:* ${getSetting('contact_whatsapp', '081947215703')}
+📞 *Support:* ${getSetting('contact_whatsapp', '085778015569')}
 
 *${getCompanyHeader()}*`;
                 break;
@@ -489,7 +489,7 @@ Laporan masalah Anda telah diterima:
 
 Tim support akan segera menindaklanjuti.
 
-📞 *Support:* ${getSetting('contact_whatsapp', '081947215703')}
+📞 *Support:* ${getSetting('contact_whatsapp', '085778015569')}
 
 *${getCompanyHeader()}*`;
                 break;

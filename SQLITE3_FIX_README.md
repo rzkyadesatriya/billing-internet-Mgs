@@ -123,7 +123,7 @@ npm install sqlite3
 ### ðŸ“ž **Support**
 
 Jika masih mengalami masalah:
-- **WhatsApp:** 081947215703
+- **WhatsApp:** 085778015569
 - **GitHub Issues:** [Buat Issue](https://github.com/alijayanet/MGS/issues)
 - **Telegram:** [https://t.me/alijayaNetAcs](https://t.me/alijayaNetAcs)
 

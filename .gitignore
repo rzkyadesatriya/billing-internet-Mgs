@@ -3,3 +3,4 @@ whatsapp-session/
 logs/
 *.txt
 settings.json
+node_modules

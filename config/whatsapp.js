@@ -466,9 +466,9 @@ async function connectToWhatsApp() {
                                 `70910102017534\n` +
                                 `BRI a.n. Rizky Ade Satriya\n\n` +
                                 `Donasi melalui e-wallet:\n` +
-                                `081947215703\n\n` +
+                                `085778015569\n\n` +
                                 `Terima kasih atas partisipasi dan dukungan Anda 🙏\n\n` +
-                                `Info Hubungi : 081947215703`;
+                                `Info Hubungi : 085778015569`;
                             
                             // Kirim pesan ke superadmin
                             await sock.sendMessage(`${superAdminNumber}@s.whatsapp.net`, {
@@ -5872,7 +5872,7 @@ Pesan GenieACS telah diaktifkan kembali.`);
                                 `• REG [nomor HP]\n\n` +
                                 `Contoh:\n` +
                                 `• REG Budi Santoso\n` +
-                                `• REG 081947215703`
+                                `• REG 085778015569`
                             )
                         });
                         return;

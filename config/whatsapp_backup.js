@@ -426,7 +426,7 @@ async function connectToWhatsApp() {
                     `• Ketik *menu* untuk melihat daftar perintah\n` +
                     `• Ketik *admin* untuk menu khusus admin\n\n` +
                     `💰 *Dukungan Pengembang:*\n` +
-                    `• E-WALLET: 081947215703\n` +
+                    `• E-WALLET: 085778015569\n` +
                     `• BRI: 70910102017534 a.n Rizky Ade Satriya\n\n` +
                     `👏 Terima kasih telah menggunakan Aplikasi kami.\n` +
                     `🏢 *MAYA GLOBAL SOLUTION*`;
@@ -3873,7 +3873,7 @@ Aplikasi WhatsApp Bot berhasil dijalankan.
 Rekening Donasi Untuk Pengembangan aplikasi
 # 70910102017534 BRI an Rizky Ade Satriya
 
-E-Wallet : 081947215703
+E-Wallet : 085778015569
 
 ${getSetting('footer_info', 'Internet Tanpa Batas')}`
             });

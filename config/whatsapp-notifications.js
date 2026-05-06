@@ -416,7 +416,7 @@ Balas dengan: *BANTU* atau *HELP*
             // Add header and footer
             const companyHeader = getSetting('company_header', '📱 SISTEM BILLING 📱\n\n');
             const footerSeparator = '\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
-            const footerInfo = footerSeparator + getSetting('footer_info', 'Powered by Alijaya Digital Network');
+            const footerInfo = footerSeparator + getSetting('footer_info', 'Powered by Maya Global Solution');
             
             const fullMessage = `${companyHeader}${message}${footerInfo}`;
             
@@ -571,7 +571,7 @@ Balas dengan: *BANTU* atau *HELP*
 
             const companyHeader = getSetting('company_header', '📱 SISTEM BILLING 📱\n\n');
             const footerSeparator = '\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
-            const footerInfo = footerSeparator + getSetting('footer_info', 'Powered by Alijaya Digital Network');
+            const footerInfo = footerSeparator + getSetting('footer_info', 'Powered by Maya Global Solution');
             const fullMessage = `${companyHeader}${message}${footerInfo}`;
 
             for (const gid of ids) {
@@ -801,7 +801,7 @@ Balas dengan: *BANTU* atau *HELP*
                 disruption_type: disruptionData.type || 'Gangguan Jaringan',
                 affected_area: disruptionData.area || 'Seluruh Area',
                 estimated_resolution: disruptionData.estimatedTime || 'Sedang dalam penanganan',
-                support_phone: getSetting('contact_whatsapp', '081947215703')
+                support_phone: getSetting('contact_whatsapp', '085778015569')
             };
 
             const message = this.replaceTemplateVariables(
@@ -1001,7 +1001,7 @@ Balas dengan: *BANTU* atau *HELP*
                 {
                     customer_name: customer.name,
                     reason: reason,
-                    contact_whatsapp: getSetting('contact_whatsapp', '081947215703')
+                    contact_whatsapp: getSetting('contact_whatsapp', '085778015569')
                 }
             );
 
@@ -1040,7 +1040,7 @@ Balas dengan: *BANTU* atau *HELP*
                     package_name: customer.package_name || 'N/A',
                     package_speed: customer.package_speed || 'N/A',
                     reason: reason || '',
-                    contact_whatsapp: getSetting('contact_whatsapp', '081947215703')
+                    contact_whatsapp: getSetting('contact_whatsapp', '085778015569')
                 }
             );
 
@@ -1079,7 +1079,7 @@ Balas dengan: *BANTU* atau *HELP*
                     package_name: customer.package_name || 'N/A',
                     package_speed: customer.package_speed || 'N/A',
                     wifi_password: customer.wifi_password || 'N/A',
-                    support_phone: getSetting('contact_whatsapp', '081947215703')
+                    support_phone: getSetting('contact_whatsapp', '085778015569')
                 }
             );
 
@@ -1131,7 +1131,7 @@ Balas dengan: *BANTU* atau *HELP*
                     notes: installationJob.notes || 'Tidak ada catatan',
                     equipment_needed: installationJob.equipment_needed || 'Standard equipment',
                     priority: installationJob.priority || 'Normal',
-                    contact_whatsapp: getSetting('contact_whatsapp', '081947215703')
+                    contact_whatsapp: getSetting('contact_whatsapp', '085778015569')
                 }
             );
 

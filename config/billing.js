@@ -3933,7 +3933,7 @@ Pembayaran tagihan Anda telah berhasil diproses:
 Terima kasih telah mempercayai layanan kami.
 
 *${getCompanyHeader()}*
-Info: ${getSetting('contact_whatsapp', '081947215703')}`;
+Info: ${getSetting('contact_whatsapp', '085778015569')}`;
 
             const result = await whatsapp.sendMessage(customer.phone, message);
             logger.info(`[NOTIFICATION] WhatsApp message sent successfully to ${customer.phone}`);

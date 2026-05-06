@@ -52,7 +52,7 @@ function getVersionInfo() {
         versionNotes: versionData.version_notes || 'No release notes',
         buildNumber: versionData.build_number || 'Unknown Build',
         companyHeader: settings.company_header || 'MGS-Billing',
-        footerInfo: settings.footer_info || 'Info Hubungi : 081947215703',
+        footerInfo: settings.footer_info || 'Info Hubungi : 085778015569',
         changelog: versionData.changelog || []
     };
 }
