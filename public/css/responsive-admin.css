@@ -1,8 +1,293 @@
 /* Responsive sidebar & hamburger for admin panel */
 :root {
-  --menu-light: #F5F7FB;
-  --menu-blue: #1F4E8C;
-  --menu-accent: #00A37A;
+  --menu-light: #eaf1ff;
+  --menu-blue: #162a4a;
+  --menu-accent: #21c7ff;
+  --admin-bg: #081327;
+  --admin-bg-2: #0d1d38;
+  --admin-panel: #172744;
+  --admin-panel-soft: #1d3152;
+  --admin-border: #2a4167;
+  --admin-text: #edf3ff;
+  --admin-muted: #9fb2d4;
+  --admin-primary: #3b82f6;
+  --admin-success: #22c55e;
+  --admin-warning: #f59e0b;
+  --admin-danger: #ef4444;
+}
+
+/* Global admin/billing dark theme */
+html, body {
+  background:
+    radial-gradient(1200px 520px at 14% -10%, rgba(59, 130, 246, 0.22), transparent 55%),
+    radial-gradient(900px 420px at 100% 0%, rgba(33, 199, 255, 0.14), transparent 50%),
+    linear-gradient(180deg, var(--admin-bg) 0%, var(--admin-bg-2) 100%) !important;
+  color: var(--admin-text) !important;
+}
+
+.main-content,
+.container-fluid {
+  color: var(--admin-text);
+}
+
+.main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content h4,
+.main-content h5,
+.main-content h6,
+.main-content label,
+.main-content .fw-bold {
+  color: var(--admin-text) !important;
+}
+
+.main-content p,
+.main-content small,
+.main-content .text-muted,
+.main-content .form-text {
+  color: var(--admin-muted) !important;
+}
+
+.main-content .card,
+.main-content .modal-content,
+.main-content .offcanvas,
+.main-content .dropdown-menu {
+  background: linear-gradient(180deg, var(--admin-panel) 0%, var(--admin-panel-soft) 100%) !important;
+  border: 1px solid var(--admin-border) !important;
+  color: var(--admin-text) !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28) !important;
+}
+
+.main-content .card-header,
+.main-content .card-footer,
+.main-content .modal-header,
+.main-content .modal-footer,
+.main-content .offcanvas-header {
+  background: rgba(8, 18, 38, 0.35) !important;
+  border-color: var(--admin-border) !important;
+  color: var(--admin-text) !important;
+}
+
+.main-content .table,
+.main-content .table td,
+.main-content .table th {
+  color: var(--admin-text) !important;
+  border-color: rgba(159, 178, 212, 0.2) !important;
+}
+
+.main-content .table thead th {
+  background: rgba(8, 18, 38, 0.48) !important;
+}
+
+.main-content .table-hover tbody tr:hover {
+  background: rgba(33, 199, 255, 0.08) !important;
+}
+
+/* Strong override for Bootstrap striped tables */
+.main-content .table-striped > tbody > tr:nth-of-type(odd) > * {
+  background: #132541 !important;
+  color: var(--admin-text) !important;
+}
+
+.main-content .table-striped > tbody > tr:nth-of-type(even) > * {
+  background: #172b49 !important;
+  color: var(--admin-text) !important;
+}
+
+.main-content .table-hover > tbody > tr:hover > * {
+  background: #1d3559 !important;
+  color: #ffffff !important;
+}
+
+.main-content .table thead.table-light th,
+.main-content .table thead th {
+  background: #0f2446 !important;
+  color: #f1f6ff !important;
+  border-color: var(--admin-border) !important;
+}
+
+/* DataTables default row/background overrides (strong specificity) */
+.main-content table.dataTable tbody > tr > td,
+.main-content table.dataTable tbody > tr > th,
+.main-content .table tbody > tr > td,
+.main-content .table tbody > tr > th {
+  background: #172b49 !important;
+  color: #eaf1ff !important;
+  border-color: var(--admin-border) !important;
+}
+
+.main-content table.dataTable tbody > tr:hover > td,
+.main-content .table.table-hover tbody > tr:hover > td {
+  background: #1d3559 !important;
+  color: #ffffff !important;
+}
+
+.main-content table.dataTable tbody td.dataTables_empty {
+  background: #172b49 !important;
+  color: #eaf1ff !important;
+}
+
+.main-content .table .text-muted,
+.main-content table.dataTable .text-muted {
+  color: #cfe0ff !important;
+}
+
+.main-content .form-control,
+.main-content .form-select,
+.main-content .input-group-text {
+  background: #0f2240 !important;
+  color: var(--admin-text) !important;
+  border: 1px solid var(--admin-border) !important;
+}
+
+.main-content .form-control::placeholder {
+  color: #8fa7ce !important;
+}
+
+.main-content .dataTables_wrapper .dataTables_filter input,
+.main-content .dataTables_wrapper .dataTables_length select {
+  background: #0f2240 !important;
+  color: var(--admin-text) !important;
+  border: 1px solid var(--admin-border) !important;
+}
+
+.main-content .dataTables_wrapper .dataTables_filter label,
+.main-content .dataTables_wrapper .dataTables_length label,
+.main-content .dataTables_wrapper .dataTables_info {
+  color: #d9e7ff !important;
+}
+
+.main-content .dataTables_wrapper .dataTables_paginate .paginate_button,
+.main-content .dataTables_wrapper .paginate_button {
+  background: #0f2240 !important;
+  color: #eaf1ff !important;
+  border: 1px solid var(--admin-border) !important;
+}
+
+.main-content .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.main-content .dataTables_wrapper .paginate_button.current {
+  background: #2f80ff !important;
+  color: #ffffff !important;
+  border-color: #2f80ff !important;
+}
+
+/* DataTables Bootstrap pagination variant */
+.main-content .dataTables_wrapper .dataTables_paginate .page-item .page-link {
+  background: #0f2240 !important;
+  color: #eaf1ff !important;
+  border: 1px solid var(--admin-border) !important;
+}
+
+.main-content .dataTables_wrapper .dataTables_paginate .page-item.active .page-link {
+  background: #2f80ff !important;
+  color: #ffffff !important;
+  border-color: #2f80ff !important;
+}
+
+.main-content .dataTables_wrapper .dataTables_paginate .page-item.disabled .page-link {
+  background: #12233f !important;
+  color: #8fa7ce !important;
+  border-color: var(--admin-border) !important;
+}
+
+.main-content .form-control:focus,
+.main-content .form-select:focus {
+  border-color: var(--menu-accent) !important;
+  box-shadow: 0 0 0 0.2rem rgba(33, 199, 255, 0.2) !important;
+}
+
+.main-content .btn-primary {
+  background: linear-gradient(135deg, #2e6fe6, #1f5fcf) !important;
+  border-color: #2e6fe6 !important;
+}
+
+.main-content .btn-success {
+  background: linear-gradient(135deg, #18a75a, #15884a) !important;
+  border-color: #18a75a !important;
+}
+
+.main-content .btn-danger {
+  background: linear-gradient(135deg, #d53d53, #b53144) !important;
+  border-color: #d53d53 !important;
+}
+
+.main-content .btn-warning {
+  background: linear-gradient(135deg, #e4a71f, #be8a18) !important;
+  border-color: #e4a71f !important;
+  color: #0f172a !important;
+}
+
+.main-content .btn-outline-primary {
+  color: #79b6ff !important;
+  border-color: #79b6ff !important;
+}
+
+.main-content .btn-outline-primary:hover {
+  background: rgba(121, 182, 255, 0.16) !important;
+}
+
+.main-content .btn-outline-success {
+  color: #5fe096 !important;
+  border-color: #5fe096 !important;
+}
+
+.main-content .btn-outline-success:hover {
+  background: rgba(95, 224, 150, 0.14) !important;
+}
+
+.main-content .btn-outline-danger {
+  color: #ff8597 !important;
+  border-color: #ff8597 !important;
+}
+
+.main-content .btn-outline-danger:hover {
+  background: rgba(255, 133, 151, 0.14) !important;
+}
+
+.main-content .nav-tabs {
+  border-bottom-color: var(--admin-border) !important;
+}
+
+.main-content .nav-tabs .nav-link {
+  color: #9fc0f3 !important;
+  border-color: transparent !important;
+}
+
+.main-content .nav-tabs .nav-link:hover {
+  color: #eaf1ff !important;
+  border-color: var(--admin-border) !important;
+  background: rgba(47, 128, 255, 0.12) !important;
+}
+
+.main-content .nav-tabs .nav-link.active {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #2f80ff, #21c7ff) !important;
+  border-color: #2f80ff !important;
+}
+
+.main-content .badge.bg-secondary {
+  background: #3b4d6f !important;
+}
+
+.main-content .alert {
+  color: var(--admin-text) !important;
+  border-color: var(--admin-border) !important;
+}
+
+.main-content .alert-info {
+  background: rgba(59, 130, 246, 0.18) !important;
+}
+
+.main-content .alert-warning {
+  background: rgba(245, 158, 11, 0.18) !important;
+}
+
+.main-content .alert-danger {
+  background: rgba(239, 68, 68, 0.18) !important;
+}
+
+.main-content .alert-success {
+  background: rgba(34, 197, 94, 0.18) !important;
 }
 
 /* Global sidebar scrolling fix */
@@ -129,4 +414,3 @@
     left: -260px !important;
   }
 }
-

@@ -27,42 +27,53 @@
             margin-bottom: 10px;
         }
         .dataTables_wrapper .dataTables_filter input {
-            border: 1px solid #ddd;
+            border: 1px solid #2a4167;
             border-radius: 4px;
             padding: 5px 10px;
             margin-left: 5px;
             width: 200px;
+            background: #0f2240;
+            color: #edf3ff;
         }
         .dataTables_wrapper .dataTables_length {
             float: left;
             margin-bottom: 10px;
         }
         .dataTables_wrapper .dataTables_length select {
-            border: 1px solid #ddd;
+            border: 1px solid #2a4167;
             border-radius: 4px;
             padding: 5px;
             margin: 0 5px;
+            background: #0f2240;
+            color: #edf3ff;
         }
         .dataTables_wrapper .dataTables_paginate {
             float: right;
             margin-top: 10px;
         }
         .dataTables_wrapper .dataTables_paginate .paginate_button {
-            border: 1px solid #ddd;
+            border: 1px solid #2a4167;
             border-radius: 4px;
             padding: 5px 10px;
             margin: 0 2px;
             cursor: pointer;
+            background: #0f2240;
+            color: #eaf1ff !important;
         }
         .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-            background: #007bff;
+            background: #2f80ff;
             color: white;
-            border-color: #007bff;
+            border-color: #2f80ff;
         }
         .dataTables_wrapper .dataTables_info {
             clear: both;
             float: left;
             padding-top: 10px;
+        }
+        .dataTables_wrapper .dataTables_info,
+        .dataTables_wrapper .dataTables_length label,
+        .dataTables_wrapper .dataTables_filter label {
+            color: #d9e7ff !important;
         }
         /* Pastikan wrapper terlihat */
         .dataTables_wrapper {
@@ -93,6 +104,29 @@
             width: 100%;
             margin-bottom: 0;
             table-layout: auto;
+        }
+        /* Kontras tabel GenieACS */
+        #genieacsTable,
+        #genieacsTable td,
+        #genieacsTable th {
+            color: #eaf1ff !important;
+            border-color: #2a4167 !important;
+        }
+        #genieacsTable thead th {
+            background: #0f2446 !important;
+            color: #f1f6ff !important;
+        }
+        #genieacsTable.table-striped > tbody > tr:nth-of-type(odd) > * {
+            background: #132541 !important;
+            color: #eaf1ff !important;
+        }
+        #genieacsTable.table-striped > tbody > tr:nth-of-type(even) > * {
+            background: #172b49 !important;
+            color: #eaf1ff !important;
+        }
+        #genieacsTable.table-hover > tbody > tr:hover > * {
+            background: #1d3559 !important;
+            color: #ffffff !important;
         }
         /* Optimize column widths for better space usage */
         .table th:nth-child(1), .table td:nth-child(1) { width: 5%; min-width: 50px; }
@@ -318,9 +352,9 @@
                 width: 140px;
                 position: sticky;
                 right: 0;
-                background-color: white;
+                background-color: #162a47;
                 z-index: 2;
-                border-left: 1px solid #dee2e6;
+                border-left: 1px solid #2a4167;
             }
             
             /* Action buttons mobile optimization */

@@ -12,7 +12,7 @@
     <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css" rel="stylesheet">
     <link href="/css/responsive-admin.css" rel="stylesheet">
     <style>
-        body { background: #f5f6fa; }
+        body { background: transparent; }
         .form-label { font-weight: 600; }
 
         .main-content {
@@ -28,6 +28,16 @@
             border: 1px solid #ccc;
             padding: 4px 10px;
         }
+        #pppoeTable tbody td,
+        #pppoeTable tbody th {
+            background: #172b49 !important;
+            color: #eaf1ff !important;
+            border-color: #2a4167 !important;
+        }
+        #pppoeTable tbody td.dataTables_empty {
+            color: #eaf1ff !important;
+            background: #172b49 !important;
+        }
         /* Mobile responsive table styles */
         .table-responsive {
             overflow-x: auto;
@@ -41,6 +51,11 @@
             .table .btn {
                 padding: 0.25rem 0.5rem;
                 font-size: 0.75rem;
+            }
+            .table th:last-child,
+            .table td:last-child {
+                background: #162a47 !important;
+                border-left: 1px solid #2a4167 !important;
             }
         }
         .card.bg-primary, .card.bg-success, .card.bg-danger, .card.bg-info {

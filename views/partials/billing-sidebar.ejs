@@ -56,14 +56,14 @@
 
 <style>
     :root {
-        --menu-light: #F5F7FB;
-        --menu-blue: #1F4E8C;
-        --menu-accent: #00A37A;
+        --menu-light: #eaf1ff;
+        --menu-blue: #162a4a;
+        --menu-accent: #21c7ff;
     }
 
     /* Mobile Top Navbar */
     .mobile-navbar {
-        background: var(--menu-blue);
+        background: linear-gradient(135deg, #102445 0%, #16345f 100%);
         position: fixed;
         top: 0;
         left: 0;
@@ -99,7 +99,7 @@
 
     /* Billing Sidebar Styling */
     #sidebar {
-        background: var(--menu-blue) !important;
+        background: linear-gradient(180deg, #132746 0%, #10213b 100%) !important;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -163,7 +163,7 @@
     #sidebar .sidebar-links a:hover,
     #sidebar .sidebar-links a.active {
         color: var(--menu-light) !important;
-        background-color: var(--menu-accent);
+        background: linear-gradient(135deg, #1aa8d8 0%, #2f80ff 100%);
         transform: translateX(3px);
     }
 
@@ -238,4 +238,3 @@
         }
     });
 </script>
-

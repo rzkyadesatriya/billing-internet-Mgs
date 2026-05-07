@@ -463,7 +463,8 @@ class ServiceSuspensionManager {
 
             // Ambil pengaturan grace period
             const gracePeriodDays = parseInt(getSetting('suspension_grace_period_days', '7'));
-            const autoSuspensionEnabled = getSetting('auto_suspension_enabled', 'true') === 'true';
+            const autoSuspensionRaw = getSetting('auto_suspension_enabled', true);
+            const autoSuspensionEnabled = autoSuspensionRaw === true || String(autoSuspensionRaw).toLowerCase() === 'true';
 
             if (!autoSuspensionEnabled) {
                 logger.info('Auto suspension is disabled in settings');

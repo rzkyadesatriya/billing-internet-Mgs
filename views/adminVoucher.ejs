@@ -6,11 +6,12 @@
     <title>Admin Voucher Hotspot</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/css/responsive-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
+            background-color: transparent;
         }
         .content {
             padding: 20px;
@@ -72,6 +73,81 @@
             margin-bottom: 20px;
             background-color: #fff;
         }
+        /* Dark theme overrides for voucher page */
+        .main-content { color: #edf3ff; }
+        .main-content h3, .main-content h4, .main-content h5, .main-content h6,
+        .main-content label, .main-content p, .main-content span { color: #edf3ff; }
+        .main-content .text-muted { color: #b8c9e8 !important; }
+
+        .main-content .card {
+            background: linear-gradient(180deg, #172744 0%, #1d3152 100%) !important;
+            border: 1px solid #2a4167 !important;
+            color: #edf3ff !important;
+        }
+        .main-content .card-header {
+            border-color: #2a4167 !important;
+        }
+        .main-content .form-control,
+        .main-content .form-select,
+        .main-content .input-group-text {
+            background: #0f2240 !important;
+            color: #edf3ff !important;
+            border: 1px solid #2a4167 !important;
+        }
+        .main-content .form-control::placeholder { color: #8fa7ce !important; }
+
+        .main-content #voucherHistoryTable thead th {
+            background: #0f2446 !important;
+            color: #f1f6ff !important;
+            border-color: #2a4167 !important;
+        }
+        .main-content #voucherHistoryTable tbody td {
+            background: #172b49 !important;
+            color: #eaf1ff !important;
+            border-color: #2a4167 !important;
+        }
+        .main-content #voucherHistoryTable.table-striped > tbody > tr:nth-of-type(odd) > * {
+            background: #132541 !important;
+            color: #eaf1ff !important;
+        }
+        .main-content #voucherHistoryTable.table-striped > tbody > tr:nth-of-type(even) > * {
+            background: #172b49 !important;
+            color: #eaf1ff !important;
+        }
+        .main-content #voucherHistoryTable.table-hover > tbody > tr:hover > * {
+            background: #1d3559 !important;
+            color: #ffffff !important;
+        }
+
+        .main-content .dataTables_wrapper .dataTables_filter input,
+        .main-content .dataTables_wrapper .dataTables_length select {
+            background: #0f2240 !important;
+            color: #edf3ff !important;
+            border: 1px solid #2a4167 !important;
+        }
+        .main-content .dataTables_wrapper .dataTables_filter label,
+        .main-content .dataTables_wrapper .dataTables_length label,
+        .main-content .dataTables_wrapper .dataTables_info {
+            color: #d9e7ff !important;
+        }
+        .main-content .dataTables_wrapper .dataTables_paginate .page-item .page-link {
+            background: #0f2240 !important;
+            color: #eaf1ff !important;
+            border: 1px solid #2a4167 !important;
+        }
+        .main-content .dataTables_wrapper .dataTables_paginate .page-item.active .page-link {
+            background: #2f80ff !important;
+            color: #fff !important;
+            border-color: #2f80ff !important;
+        }
+
+        .main-content .nav-tabs .nav-link.active {
+            background: linear-gradient(135deg, #2f80ff, #21c7ff) !important;
+            border-color: #2f80ff !important;
+            color: #fff !important;
+        }
+        .main-content .nav-tabs .nav-link { color: #9fc0f3 !important; }
+        .main-content .nav-tabs .nav-link:hover { color: #eaf1ff !important; }
         .voucher-header {
             font-size: 1.1em;
             font-weight: bold;
@@ -1939,5 +2015,4 @@
     </script>
 </body>
 </html>
-
 

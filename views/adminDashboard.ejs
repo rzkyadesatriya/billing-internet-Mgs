@@ -8,8 +8,87 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="/css/responsive-admin.css" rel="stylesheet">
     <style>
-        body { background: #f5f6fa; }
-        
+        :root {
+            --dash-bg: #0a1328;
+            --dash-bg-soft: #111f3f;
+            --dash-panel: #1a2946;
+            --dash-panel-2: #22324f;
+            --dash-border: #2b3d5f;
+            --dash-text: #ecf2ff;
+            --dash-muted: #9fb2d3;
+            --dash-accent: #2f80ff;
+            --dash-accent-2: #00d4ff;
+        }
+
+        body {
+            background:
+                radial-gradient(1200px 500px at 20% -10%, rgba(47, 128, 255, 0.18), transparent 55%),
+                radial-gradient(900px 400px at 95% 0%, rgba(0, 212, 255, 0.12), transparent 50%),
+                linear-gradient(180deg, var(--dash-bg) 0%, #0b1730 100%);
+            color: var(--dash-text);
+        }
+
+        .dashboard-theme {
+            color: var(--dash-text);
+        }
+
+        .dashboard-theme h5,
+        .dashboard-theme h6,
+        .dashboard-theme .fw-bold,
+        .dashboard-theme .form-label {
+            color: var(--dash-text);
+        }
+
+        .dashboard-theme .text-muted {
+            color: var(--dash-muted) !important;
+        }
+
+        .dashboard-theme .form-select,
+        .dashboard-theme .form-control {
+            background: #152441;
+            border: 1px solid var(--dash-border);
+            color: var(--dash-text);
+        }
+
+        .dashboard-theme .form-select:focus,
+        .dashboard-theme .form-control:focus {
+            border-color: var(--dash-accent);
+            box-shadow: 0 0 0 0.2rem rgba(47, 128, 255, 0.2);
+        }
+
+        .dashboard-theme .card {
+            background: linear-gradient(180deg, var(--dash-panel) 0%, #1a2741 100%);
+            border: 1px solid var(--dash-border);
+            color: var(--dash-text);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+        }
+
+        .dashboard-theme .card.text-bg-primary {
+            background: linear-gradient(135deg, #224f93, #1f4178) !important;
+        }
+
+        .dashboard-theme .card.text-bg-success {
+            background: linear-gradient(135deg, #1f7b6d, #1a6157) !important;
+        }
+
+        .dashboard-theme .card.text-bg-danger {
+            background: linear-gradient(135deg, #8c3353, #6f2741) !important;
+        }
+
+        .dashboard-theme .card.text-bg-info {
+            background: linear-gradient(180deg, #152746 0%, #11213d 100%) !important;
+            color: var(--dash-text) !important;
+        }
+
+        .dashboard-theme .card.text-bg-warning {
+            background: linear-gradient(135deg, #755f1e, #5d4a16) !important;
+        }
+
+        .dashboard-theme .traffic-chart-card {
+            border: 1px solid var(--dash-border);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.28);
+        }
+
         /* Mobile responsive fixes */
         @media (max-width: 767.98px) {
             .main-content {
@@ -182,10 +261,10 @@
         }
 
         .traffic-chart-transparent {
-            background: rgba(255, 255, 255, 0.9) !important;
-            color: #1f2a37 !important;
-            border: 1px solid rgba(15, 23, 42, 0.08) !important;
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.1);
+            background: linear-gradient(180deg, var(--dash-panel-2) 0%, #1b2a45 100%) !important;
+            color: var(--dash-text) !important;
+            border: 1px solid var(--dash-border) !important;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
             backdrop-filter: blur(2px);
         }
         
@@ -239,7 +318,7 @@
         <%- include('partials/admin-responsive-sidebar', { page: 'dashboard', settings: settings }) %>
         <% } %>
         
-        <main class="col-md-10 ms-sm-auto main-content">
+<main class="col-md-10 ms-sm-auto main-content dashboard-theme">
             <!-- CONFIGURATION VALIDATION ALERTS -->
             <% if (configValidation && configValidation.hasValidationRun) { %>
                 <% if (configValidation.summary && configValidation.summary.status !== 'valid') { %>
@@ -573,38 +652,17 @@
             const maxPoints = 30; // tampilkan 30 data terakhir
             let currentInterface = localStorage.getItem('selectedInterface') || 'ether1-ISP';
             
-            // Utility function untuk format bandwidth
-            function formatBandwidth(bytesPerSec) {
-              if (bytesPerSec >= 1000000000) { // 1 Gbps
-                return (bytesPerSec / 1000000000).toFixed(2) + ' Gbps';
-              } else if (bytesPerSec >= 1000000) { // 1 Mbps
-                return (bytesPerSec / 1000000).toFixed(2) + ' Mbps';
-              } else if (bytesPerSec >= 1000) { // 1 Kbps
-                return (bytesPerSec / 1000).toFixed(2) + ' Kbps';
+            // Utility function untuk format bandwidth (input: bits per second / bps)
+            function formatBandwidth(bitsPerSec) {
+              if (bitsPerSec >= 1000000000) { // 1 Gbps
+                return (bitsPerSec / 1000000000).toFixed(2) + ' Gbps';
+              } else if (bitsPerSec >= 1000000) { // 1 Mbps
+                return (bitsPerSec / 1000000).toFixed(2) + ' Mbps';
+              } else if (bitsPerSec >= 1000) { // 1 Kbps
+                return (bitsPerSec / 1000).toFixed(2) + ' Kbps';
               } else {
-                return bytesPerSec.toFixed(2) + ' bps';
+                return bitsPerSec.toFixed(2) + ' bps';
               }
-            }
-            
-            // Utility function untuk format bandwidth tanpa unit (untuk chart)
-            function formatBandwidthValue(bytesPerSec) {
-              if (bytesPerSec >= 1000000000) { // 1 Gbps
-                return (bytesPerSec / 1000000000).toFixed(3);
-              } else if (bytesPerSec >= 1000000) { // 1 Mbps
-                return (bytesPerSec / 1000000).toFixed(3);
-              } else if (bytesPerSec >= 1000) { // 1 Kbps
-                return (bytesPerSec / 1000).toFixed(3);
-              } else {
-                return bytesPerSec.toFixed(3);
-              }
-            }
-            
-            // Utility function untuk mendapatkan unit yang sesuai
-            function getBandwidthUnit(bytesPerSec) {
-              if (bytesPerSec >= 1000000000) return 'Gbps';
-              if (bytesPerSec >= 1000000) return 'Mbps';
-              if (bytesPerSec >= 1000) return 'Kbps';
-              return 'bps';
             }
             
             // Chart Configuration
@@ -621,7 +679,7 @@
                   legend: { 
                     display: true,
                     position: 'top',
-                    labels: { padding: 10, usePointStyle: true }
+                    labels: { padding: 10, usePointStyle: true, color: '#dbe7ff' }
                   },
                   tooltip: {
                     mode: 'index',
@@ -632,8 +690,7 @@
                     callbacks: {
                       label: function(context) {
                         const value = context.parsed.y;
-                        const unit = getBandwidthUnit(value * 1000000); // Convert back to bytes
-                        return context.dataset.label + ': ' + value + ' ' + unit;
+                        return context.dataset.label + ': ' + formatBandwidth(value);
                       }
                     }
                   }
@@ -641,20 +698,20 @@
                 scales: { 
                   y: { 
                     beginAtZero: true,
-                    title: { display: true, text: 'Bandwidth', font: { size: 12 } },
+                    title: { display: true, text: 'Bandwidth', font: { size: 12 }, color: '#c8d8f6' },
                     ticks: {
                       callback: function(value) {
-                        const unit = getBandwidthUnit(value * 1000000);
-                        return value + ' ' + unit;
+                        return formatBandwidth(value);
                       },
+                      color: '#c8d8f6',
                       font: { size: 10 }
                     },
-                    grid: { color: 'rgba(0,0,0,0.1)' }
+                    grid: { color: 'rgba(167, 189, 224, 0.18)' }
                   },
                   x: {
-                    title: { display: true, text: 'Time', font: { size: 12 } },
-                    ticks: { font: { size: 10 } },
-                    grid: { color: 'rgba(0,0,0,0.1)' },
+                    title: { display: true, text: 'Time', font: { size: 12 }, color: '#c8d8f6' },
+                    ticks: { font: { size: 10 }, color: '#c8d8f6' },
+                    grid: { color: 'rgba(167, 189, 224, 0.14)' },
                     min: 0,
                     max: maxPoints - 1
                   }
@@ -801,18 +858,14 @@ function addTrafficData(rx, tx, interface) {
 }
 
 function updateAllCharts(label, rxBytes, txBytes) {
-  // Convert to appropriate unit for charts
-  const rxValue = formatBandwidthValue(rxBytes);
-  const txValue = formatBandwidthValue(txBytes);
-  
   // Update RX Chart
-  updateChart(rxChart, label, rxValue, 'RX');
+  updateChart(rxChart, label, rxBytes, 'RX');
   
   // Update TX Chart
-  updateChart(txChart, label, txValue, 'TX');
+  updateChart(txChart, label, txBytes, 'TX');
   
   // Update Combined Chart
-  updateCombinedChart(label, rxValue, txValue);
+  updateCombinedChart(label, rxBytes, txBytes);
 }
 
 function updateChart(chart, label, value, type) {

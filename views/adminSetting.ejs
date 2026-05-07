@@ -22,7 +22,7 @@
         }
 
         body {
-            background: #f5f6fa;
+            background: transparent;
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
@@ -35,13 +35,13 @@
             border-radius: 16px;
             box-shadow: var(--card-shadow);
             overflow: hidden;
-            background: white;
+            background: linear-gradient(180deg, #172744 0%, #1d3152 100%);
             margin-bottom: 24px;
         }
 
         .card-header {
-            background: white;
-            border-bottom: 1px solid #edf2f7;
+            background: rgba(8, 18, 38, 0.35);
+            border-bottom: 1px solid #2a4167;
             padding: 1.25rem 1.5rem;
         }
 
@@ -55,14 +55,14 @@
 
         .settings-sidebar {
             width: var(--sidebar-width);
-            background: #fff;
-            border-right: 1px solid #edf2f7;
+            background: linear-gradient(180deg, #132746 0%, #10213b 100%);
+            border-right: 1px solid #2a4167;
             padding: 0.5rem 0;
             flex-shrink: 0;
         }
 
         .settings-nav .nav-link {
-            color: #718096;
+            color: #9fc0f3;
             padding: 0.75rem 1.5rem;
             font-weight: 500;
             border-radius: 0;
@@ -82,21 +82,21 @@
         }
 
         .settings-nav .nav-link:hover {
-            color: var(--primary-color);
-            background: #f8faff;
+            color: #eaf1ff;
+            background: rgba(47, 128, 255, 0.12);
         }
 
         .settings-nav .nav-link.active {
-            color: var(--primary-color);
-            background: #f0f4ff;
-            border-left-color: var(--primary-color);
+            color: #ffffff;
+            background: linear-gradient(135deg, #2f80ff, #21c7ff);
+            border-left-color: #21c7ff;
         }
 
         .settings-content {
             flex-grow: 1;
             min-width: 0;
             padding: 1.25rem 1.5rem;
-            background: #fff;
+            background: linear-gradient(180deg, #172744 0%, #1d3152 100%);
             /* overflow-y: auto; removed */
             overflow-x: auto;
             height: auto;
@@ -105,7 +105,7 @@
 
         .form-label {
             font-weight: 600;
-            color: #4a5568;
+            color: #d9e7ff;
             margin-bottom: 0.35rem;
             font-size: 0.9rem;
         }
@@ -114,35 +114,38 @@
         .form-select {
             border-radius: 8px;
             padding: 0.5rem 0.8rem;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #2a4167;
+            background: #0f2240;
+            color: #edf3ff;
         }
+        .form-control::placeholder { color: #8fa7ce; }
 
         .form-section-title {
             font-size: 1.05rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: #2d3748;
+            color: #edf3ff;
             display: flex;
             align-items: center;
             gap: 10px;
-            border-bottom: 2px solid #f0f4ff;
+            border-bottom: 2px solid #2a4167;
             padding-bottom: 8px;
         }
 
         .qr-wrapper {
-            background: #f8fafc;
+            background: #132541;
             border-radius: 12px;
             padding: 20px;
-            border: 1px dashed #cbd5e0;
+            border: 1px dashed #4d6792;
             text-align: center;
         }
 
         .command-group {
-            background: #f8fafc;
+            background: #132541;
             border-radius: 12px;
             padding: 15px;
             margin-bottom: 15px;
-            border: 1px solid #edf2f7;
+            border: 1px solid #2a4167;
         }
 
         .command-group-title {
@@ -151,16 +154,22 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 10px;
-            color: #718096;
+            color: #b8c9e8;
         }
 
         .settings-footer {
-            background: white;
-            border-top: 1px solid #edf2f7;
+            background: linear-gradient(180deg, #172744 0%, #1d3152 100%);
+            border-top: 1px solid #2a4167;
             padding: 1.5rem 2rem;
             display: flex;
             justify-content: flex-end;
             gap: 10px;
+        }
+
+        .settings-content .text-muted,
+        .settings-content small,
+        .settings-content .form-text {
+            color: #b8c9e8 !important;
         }
 
         @media (max-width: 991.98px) {
@@ -1089,5 +1098,4 @@
 </body>
 
 </html>
-
 
