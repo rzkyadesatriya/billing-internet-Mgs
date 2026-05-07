@@ -68,7 +68,7 @@ const getAppSettings = (req, res, next) => {
         footerInfo: getSetting('footer_info', ''),
         logoFilename: getSetting('logo_filename', 'logo.png'),
         company_slogan: getSetting('company_slogan', ''),
-        company_website: getSetting('company_website', ''),
+        company_website: getSetting('company_website', 'mgs.com'),
         invoice_notes: getSetting('invoice_notes', ''),
         payment_bank_name: getSetting('payment_bank_name', ''),
         payment_account_number: getSetting('payment_account_number', ''),
@@ -76,7 +76,7 @@ const getAppSettings = (req, res, next) => {
         payment_cash_address: getSetting('payment_cash_address', ''),
         payment_cash_hours: getSetting('payment_cash_hours', ''),
         contact_phone: getSetting('contact_phone', ''),
-        contact_email: getSetting('contact_email', ''),
+        contact_email: getSetting('contact_email', 'mayaglobalsolution@gmail.com'),
         contact_address: getSetting('contact_address', ''),
         contact_whatsapp: getSetting('contact_whatsapp', ''),
         suspension_grace_period_days: getSetting('suspension_grace_period_days', '3'),
@@ -5362,4 +5362,3 @@ router.get('/reports', getAppSettings, async (req, res) => {
 });
 
 module.exports = router;
-

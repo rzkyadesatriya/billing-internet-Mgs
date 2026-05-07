@@ -168,6 +168,9 @@ const getAppSettings = (req, res, next) => {
         payment_account_holder: getSetting('payment_account_holder', 'MAYA GLOBAL SOLUTION'),
         payment_cash_address: getSetting('payment_cash_address', 'Jl. Contoh No. 123'),
         payment_cash_hours: getSetting('payment_cash_hours', '08:00 - 17:00'),
+        company_website: getSetting('company_website', 'mgs.com'),
+        contact_email: getSetting('contact_email', 'mayaglobalsolution@gmail.com'),
+        contact_address: getSetting('contact_address', 'Jl. Pantai Tanjungpura Desa Ujunggebang'),
         contact_whatsapp: getSetting('contact_whatsapp', '085778015569'),
         contact_phone: getSetting('contact_phone', '0812-3456-7890')
     };
@@ -939,5 +942,4 @@ router.post('/create-payment', async (req, res) => {
 });
 
 module.exports = router; 
-
 

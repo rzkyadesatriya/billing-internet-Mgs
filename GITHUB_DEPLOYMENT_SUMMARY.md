@@ -105,7 +105,7 @@ npm start
 3. **DATA_README.md** - Manajemen data
 4. **WHATSAPP_SETUP.md** - Konfigurasi WhatsApp
 5. **WHATSAPP_FIX_SUMMARY.md** - Ringkasan perbaikan
-6. **Website Dokumentasi** - https://MGS.alijaya.net
+6. **Website Dokumentasi** - https://mgs.com
 
 ## ðŸ›¡ï¸ Keamanan
 
@@ -127,4 +127,4 @@ Repository sekarang siap untuk:
 Untuk bantuan lebih lanjut:
 - Buat issue di GitHub repository
 - Hubungi tim pengembang
-- Gunakan dokumentasi online di https://MGS.alijaya.net
+- Gunakan dokumentasi online di https://mgs.com
